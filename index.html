@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow | Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>StudyFlow 🌸</h1>
+        <p>Your goals, your pace, your progress.</p>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h2>Welcome to your study space!</h2>
+            <p>Small steps every day lead to big achievements.</p>
+            <button id="startBtn">Start My Journey</button>
+        </section>
+
+        <section class="dashboard">
+            <h2>My Dashboard ✨</h2>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <h3>Today's Tasks</h3>
+                    <p id="totalTasks">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Completed</h3>
+                    <p id="completedTasks">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>My Progress</h3>
+                    <p id="progressText">0%</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="task-section">
+            <h2>My Study Tasks 📝</h2>
+
+          
+<form id="taskForm">
+    <label for="taskInput">What do you want to study?</label>
+
+    <div class="task-input-row">
+        <input
+            type="text"
+            id="taskInput"
+            placeholder="e.g. Practice JavaScript"
+            required
+        >
+
+        <select id="subjectInput" aria-label="Select subject" required>
+            <option value="" disabled selected>Select Subject</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Data Mining">Data Mining</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <input
+            type="date"
+            id="dueDateInput"
+            aria-label="Task due date"
+            required
+        >
+
+        <button type="submit">Add Task +</button>
+    </div>
+</form>
+
+<div class="task-filters">
+    <label for="subjectFilter">Filter by subject:</label>
+
+    <select id="subjectFilter">
+        <option value="All">All Subjects</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Data Mining">Data Mining</option>
+        <option value="Artificial Intelligence">Artificial Intelligence</option>
+        <option value="Cybersecurity">Cybersecurity</option>
+        <option value="Other">Other</option>
+    </select>
+</div>
+
+<ul id="taskList"></ul>
+<div class="api-task-section">
+    <h3>Tasks from Server</h3>
+    <ul id="apiTaskList"></ul>
+</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with 💗 for your dreams and goals.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
