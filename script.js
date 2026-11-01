@@ -1,5 +1,5 @@
 /* ===== StudyFlow: Subject-Based Tasks with Local Storage ===== */
-
+ const API_BASE_URL = "";
 const startBtn = document.getElementById("startBtn");
 const taskForm = document.getElementById("taskForm");
 const taskInput = document.getElementById("taskInput");
@@ -77,7 +77,7 @@ function updateStats() {
 }
 
 // Display tasks according to the selected subject.
-function renderTasks(){
+ function renderTasks(){
     taskList.replaceChildren();
 
     const selectedSubject = subjectFilter.value;
@@ -136,43 +136,37 @@ function renderTasks(){
 
     checkbox.disabled = true;
 
-    try {
-        const response = await fetch(
-            `http://localhost:3000/api/tasks/${task.id}`,
-            {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    completed: newStatus
-                })
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Failed to update task status.");
+ try {
+    const response = await fetch(
+        `${API_BASE_URL}/api/tasks/${task.id}`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                completed: newStatus
+            })
         }
+    );
 
-        const updatedTask = await response.json();
-
-        task.completed = updatedTask.completed;
-
-        saveTasks();
-        renderTasks();
-
-        console.log("Task status updated:", updatedTask);
-
-    } catch (error) {
-        task.completed = previousStatus;
-        checkbox.checked = previousStatus;
-        checkbox.disabled = false;
-
-        console.error("Update Error:", error);
-        alert("Unable to update task. Please try again.");
+    if (!response.ok) {
+        throw new Error("Failed to update task.");
     }
- });
-  const editBtn = document.createElement("button");
+    task.completed = newStatus;
+    checkbox.disabled = false;
+    saveTasks();
+    renderTasks();
+} catch (error) {
+    task.completed = previousStatus;
+    checkbox.checked = previousStatus;
+    checkbox.disabled = false;
+
+    console.error("Update Error:", error);
+    alert("Unable to update task. Please try again.");
+}
+});
+const editBtn = document.createElement("button");
 editBtn.type = "button";
 editBtn.textContent = "Edit";
 editBtn.setAttribute("aria-label", "Edit task");
@@ -233,7 +227,7 @@ li.append(
 
     try {
         const response = await fetch(
-            `http://localhost:3000/api/tasks/${task.id}`,
+            `${API_BASE_URL}/api/tasks/${task.id}`,
             {
                 method: "PUT",
                 headers: {
@@ -326,7 +320,8 @@ li.append(
     li.append(checkbox, taskDetails, editBtn, deleteBtn);
     taskList.appendChild(li);
     });
-    updateStats()};
+    updateStats();
+    }
   // Keep the existing welcome button functionality.
     startBtn.addEventListener("click", function () {
     document.querySelector(".welcome h2").textContent =
