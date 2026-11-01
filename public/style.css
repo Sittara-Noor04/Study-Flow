@@ -163,8 +163,18 @@ input:focus-visible {
 }
 
 .task-input-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(130px, 1fr) minmax(130px, 1fr) auto;
     gap: 12px;
+    align-items: center;
+}
+
+.task-input-row input,
+.task-input-row select,
+.task-input-row button {
+    width: 100%;
+    min-width: 0;
+    margin-top: 0;
 }
 
 #taskInput {
@@ -328,10 +338,11 @@ footer {
     }
 
     .task-input-row button {
-        width: 100%;
+        grid-column: 1 / -1;
     }
 
     #subjectFilter {
+        width: 100%;
         margin: 8px 0 0;
     }
 }
@@ -371,14 +382,11 @@ footer {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .task-input-row #taskInput {
-        grid-column: auto;
-    }
-
     .task-input-row #taskInput,
     .task-input-row select,
     .task-input-row input[type="date"],
     .task-input-row button {
+        grid-column: 1;
         width: 100%;
         min-width: 0;
     }
@@ -386,7 +394,6 @@ footer {
     #subjectFilter {
         display: block;
         width: 100%;
-        margin: 8px 0 0;
     }
 }
 
