@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 //connecting pstgresql database
 const { Pool } = require("pg");
 
@@ -27,10 +28,13 @@ pool.query("SELECT NOW()")
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("StudyFlow Server is Running!")
-});
 
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.get("/api/tasks", async (req, res) => {
     try {
@@ -190,6 +194,6 @@ app.delete("/api/tasks/:id", async (req, res) => {
         });
     }
 });
-const PORT = process.env.PORT || 3000;
+
 
 module.exports = app;
