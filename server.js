@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 //connecting pstgresql database
 const { Pool } = require("pg");
 
@@ -26,6 +27,8 @@ pool.query("SELECT NOW()")
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/tasks", async (req, res) => {
     try {
