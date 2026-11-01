@@ -290,7 +290,7 @@ li.append(
 
     try {
         const response = await fetch(
-            `http://localhost:3000/api/tasks/${task.id}`,
+            `${API_BASE_URL}/api/tasks/${task.id}`,
             {
                 method: "DELETE"
             }
@@ -381,7 +381,7 @@ renderTasks();
   
 async function sendTaskToServer(task) {
     try {
-        const response = await fetch("http://localhost:3000/api/tasks", {
+        const response = await fetch(`${API_BASE_URL}/api/tasks`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -429,7 +429,7 @@ async function sendTaskToServer(task) {
 // Load tasks from the PostgreSQL database.
 async function loadTasksFromServer() {
     try {
-        const response = await fetch("http://localhost:3000/api/tasks");
+        const response = await fetch(`${API_BASE_URL}/api/tasks`);
 
         if (!response.ok) {
             throw new Error("Failed to load tasks from the database.");
